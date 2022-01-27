@@ -1,7 +1,7 @@
 export const qrToBraille = (qr: number[][]): string[][] => {
   const braille = []
 
-  for (let r = 0; r < qr[r].length; r += 2) {
+  for (let r = 0; r < qr.length; r += 4) {
     const row = []
     for (let c = 0; c < qr[r].length; c += 2) {
       /**
@@ -53,10 +53,10 @@ export const brailleToQr = (braille: string[][]): number[][] => {
   return qr
 }
 
-export const binaryToCharacter = (binary: string): string =>
+const binaryToCharacter = (binary: string): string =>
   String.fromCodePoint(parseInt(parseInt(binary, 2).toString(16), 16) + 0x2800)
 
-export const characterToBinary = (character: string): string =>
+const characterToBinary = (character: string): string =>
   (character.codePointAt(0) - 0x2800).toString(2).padStart(8, '0')
 
 export const print2dMatrix = (matrix: string[][]): string =>
