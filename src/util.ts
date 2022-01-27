@@ -31,12 +31,24 @@ export const qrToBraille = (qr: number[][]): string[][] => {
   return braille
 }
 
-const brailleToQr = (braille: string[][]): number[][] => {
-  const qr: number[][] = new Array(braille.length)
+export const brailleToQr = (braille: string[][]): number[][] => {
+  const qr: number[][] = new Array(braille.length * 4)
     .fill(0)
-    .map(() => new Array(qr[0].length).fill(0))
+    .map(() => new Array(braille[0].length * 2).fill(0))
 
-
+  braille.forEach((row, r) => {
+    row.forEach((character, c) => {
+      const binary = characterToBinary(character)
+      qr[r][c] = +binary[7]
+      qr[r+1][c] = +binary[6]
+      qr[r+2][c] = +binary[5]
+      qr[r][c+1] = +binary[4]
+      qr[r+1][c+1] = +binary[3]
+      qr[r+2][c+1] = +binary[2]
+      qr[r+3][c] = +binary[1]
+      qr[r+3][c+1] = +binary[0]
+    })
+  })
 
   return qr
 }
@@ -47,5 +59,5 @@ export const binaryToCharacter = (binary: string): string =>
 export const characterToBinary = (character: string): string =>
   (character.codePointAt(0) - 0x2800).toString(2).padStart(8, '0')
 
-export const printBraille = (braille: string[][]): string =>
-  braille.map(row => row.join('')).join('\n')
+export const print2dMatrix = (matrix: string[][]): string =>
+  matrix.map(row => row.join('')).join('\n')
