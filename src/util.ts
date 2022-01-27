@@ -13,14 +13,14 @@ export const qrToBraille = (qr: number[][]): string[][] => {
        * 7 8
        */
       const binary =
-        `${qr[r + 3]?.[c + 1] ?? 0}` + // 8
-        `${qr[r + 3]?.[c] ?? 0}` + // 7
-        `${qr[r + 2]?.[c + 1] ?? 0}` + // 6
-        `${qr[r + 1]?.[c + 1] ?? 0}` + // 5
-        `${qr[r]?.[c + 1] ?? 0}` + // 4
-        `${qr[r + 2]?.[c] ?? 0}` + // 3
-        `${qr[r + 1]?.[c] ?? 0}` + // 2
-        `${qr[r]?.[c] ?? 0}` // 1
+        `${qr[r + 3]?.[c + 1] ?? 0}` +  // 8
+        `${qr[r + 3]?.[c] ?? 0}` +      // 7
+        `${qr[r + 2]?.[c + 1] ?? 0}` +  // 6
+        `${qr[r + 1]?.[c + 1] ?? 0}` +  // 5
+        `${qr[r]?.[c + 1] ?? 0}` +      // 4
+        `${qr[r + 2]?.[c] ?? 0}` +      // 3
+        `${qr[r + 1]?.[c] ?? 0}` +      // 2
+        `${qr[r]?.[c] ?? 0}`            // 1
 
       const characterCode = binaryToCharacter(binary)
       row.push(characterCode)
