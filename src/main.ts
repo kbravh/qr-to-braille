@@ -1,10 +1,14 @@
-import {qr} from './testData'
-import {qrToBraille, brailleToQr, print2dMatrix} from './util'
+import {matrixQr} from './testData'
+import {qrToBraille, brailleToQr, print2dMatrix, qrToEmoji} from './util'
 
-const braille = qrToBraille(qr)
+const braille = qrToBraille(matrixQr)
+console.log(braille)
 
 console.log(print2dMatrix(braille))
 
-const qrParsed = brailleToQr(braille)
+const qr = brailleToQr(braille)
+console.log(qr)
 
-console.log(print2dMatrix(qrParsed))
+console.log(print2dMatrix(qr))
+
+console.log(qrToEmoji(qr))

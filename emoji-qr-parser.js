@@ -24,6 +24,12 @@ let qr = `
 ⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️
 `
 
-let matrix = qr.split('\n').map(row => row.split('').filter(character => character !== '️').map(character => character === '⬛' ? 0 : 1))
+let matrix = qr
+  .split('\n')
+  .map(row => row
+    .split('')
+    .filter(character => character !== '️')
+    .map(character => character === '⬛' ? 0 : 1)
+  )
 
-matrix
+console.log(matrix)

@@ -53,13 +53,14 @@ export const brailleToQr = (braille: string[][]): number[][] => {
   })
 
   // cleanup empty rows and columns of pure zeros
-  qr = qr.flatMap(row => [
-    row
+  qr = qr.flatMap(row => {
+    let newRow = row
       .join('')
       .replaceAll(/0*$/g, '')
       .split('')
-      .map(num => +num),
-  ])
+      .map(num => +num)
+    return newRow.length ? [newRow] : []
+  })
 
   return qr
 }
@@ -81,6 +82,17 @@ const at = (arr: any[], n: number) => {
   // Otherwise, this is just normal property access
   return arr[n]
 }
+
+export const emojiToQrMatrix = (emojis: string): number[][] =>
+  emojis.split('\n').map(row =>
+    row
+      .split('')
+      .filter(character => character !== '️')
+      .map(character => (character === '⬛' ? 0 : 1))
+  )
+
+export const qrToEmoji = (qr: number[][]) =>
+  qr.map(row => row.map(character => (character === 0 ? '⬛' : '⬜')))
 
 export const print2dMatrix = (matrix: string[][] | number[][]): string =>
   matrix.map(row => row.join('')).join('\n')
